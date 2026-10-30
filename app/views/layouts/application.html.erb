@@ -23,6 +23,26 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="page">
+      <div id="header">
+        <h1>Topzoo</h1>
+      </div>
+      <div id="body">
+        <div id="menu">
+          <% if is_admin ? %>
+          <%= render 'layouts/admin' %>
+          <% elsif is_user ? %>
+          <%= render 'layouts/user' %>
+          <% elsif is_guest ? %>
+          <%= render 'layouts/guest' %>
+          <% end %>
+        </div>
+        <div id="main">
+          <%= yield %>
+        </div>
+      </div>
+      <div id="footer ">Copyright, RoR 2026</div>
+    </div>
+
   </body>
 </html>

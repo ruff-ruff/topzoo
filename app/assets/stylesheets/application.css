@@ -1,10 +1,49 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+div.roles {
+    display: block;
+    margin: 100px 50px;
+}
+div.role {
+    background-color: #ddd;
+}
+div.rolea {
+    text-decoration: none;
+    background-color: #ddd;
+    color: white;
+    width: 100px;
+}
+
+div#page{
+    width:800px;
+}
+div#header {
+    height: 100px;
+    background-color: #ddd;
+}
+div#footer {
+    height: 100px;
+    background-color: #ccc;
+    text-align: center;
+}
+div#body {
+    height: 600px;
+}
+div#menu {
+    height: 50px;
+    width: 100%;
+    background-color: #0d0;
+}
+div#menu ul {
+    list-style-type: none;
+    display: flex;
+}
+div#menu ul li {
+    display: block;
+    background: #0e0;
+    margin: 10px 5px;
+}
+div#menu ul li a {
+    text-decoration: none;
+}
+div#content {
+    background-color: #eee;
+}
