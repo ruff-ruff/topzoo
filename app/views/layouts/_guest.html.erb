@@ -1,5 +1,4 @@
-<ul>
-    <li><%= link_to "Catalog", '/zoo/index' %></li>
-    <li><%= link_to "Top", '/zoo/favorites' %></li>
-    <li><%= link_to "Login", '/sessions/login' %></li>
-</ul>
+<%= link_to "Catalog", animals_path, class: "nav-link #{'active' if current_page?(animals_path) || current_page?(root_path)}" %>
+<%= link_to "Popular", popular_animals_path, class: "nav-link #{'active' if current_page?(popular_animals_path)}" %>
+<%= link_to "Log in", login_path, class: "nav-link nav-accent #{'active' if current_page?(login_path)}" %>
+<%= link_to "Register", register_path, class: "nav-link" %>

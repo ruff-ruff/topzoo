@@ -1,0 +1,29 @@
+<% content_for :title, "#{@animal.name} | Topzoo" %>
+<div class="detail-layout">
+  <div class="detail-image animal-image" style="<%= "background-image: url('#{@animal.image_url}')" if @animal.image_url.present? %>">
+    <span><%= @animal.taxonomy.split(",").first %></span>
+  </div>
+  <div class="detail-copy">
+    <p class="eyebrow"><%= @animal.taxonomy %></p>
+    <h1><%= @animal.name %></h1>
+    <p class="scientific-name"><%= @animal.scientific_name %></p>
+    <p class="lead"><%= @animal.summary %></p>
+    <dl class="facts">
+      <div><dt>Habitat</dt><dd><%= @animal.habitat %></dd></div>
+      <div><dt>Community favorites</dt><dd><%= @animal.favorite_count %></dd></div>
+    </dl>
+    <% if logged_in? %>
+      <% if current_user.favorites.exists?(animal: @animal) %>
+        <%= button_to "Remove from my favorites", animal_favorite_path(@animal), method: :delete, class: "button button-secondary" %>
+      <% else %>
+        <%= button_to "Add to my favorites", animal_favorite_path(@animal), class: "button button-primary" %>
+        <p class="muted small">You have <%= current_user.favorites.count %> of 3 favorite spots filled.</p>
+      <% end %>
+    <% else %>
+      <%= link_to "Log in to choose favorites", login_path, class: "button button-primary" %>
+    <% end %>
+    <% if is_admin? %>
+      <%= link_to "Edit animal", edit_animal_path(@animal), class: "text-link" %>
+    <% end %>
+  </div>
+</div>

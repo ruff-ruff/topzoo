@@ -1,2 +1,15 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<% content_for :title, "Create account | Topzoo" %>
+<p class="eyebrow">Join the community</p>
+<h1>Create your Topzoo account</h1>
+<p class="muted">Choose three animals that you would never want to dethrone.</p>
+<%= form_with model: @user, class: "form-stack" do |form| %>
+  <% if @user.errors.any? %>
+    <div class="form-errors"><%= @user.errors.full_messages.to_sentence %></div>
+  <% end %>
+  <%= form.label :username %>
+  <%= form.text_field :username, required: true, autofocus: true %>
+  <%= form.label :password %>
+  <%= form.password_field :password, required: true %>
+  <%= form.submit "Create account", class: "button button-primary" %>
+<% end %>
+<div class="auth-links"><%= link_to "Already have an account? Log in", login_path %></div>

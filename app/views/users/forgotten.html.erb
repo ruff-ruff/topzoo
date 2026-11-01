@@ -1,2 +1,14 @@
-<h1>Users#forgotten</h1>
-<p>Find me in app/views/users/forgotten.html.erb</p>
+<% content_for :title, "Forgot password | Topzoo" %>
+<p class="eyebrow">Account help</p>
+<h1>Forgot your password?</h1>
+<% if @submitted %>
+  <div class="flash flash-notice">Password reset instructions would be sent here once email delivery is configured.</div>
+<% else %>
+  <p class="muted">Enter your username and we will help you get back into your account.</p>
+  <%= form_with url: forgot_password_path, class: "form-stack" do |form| %>
+    <%= label_tag :username, "Username" %>
+    <%= text_field_tag :username, nil, required: true, autofocus: true %>
+    <%= submit_tag "Request reset", class: "button button-primary" %>
+  <% end %>
+<% end %>
+<div class="auth-links"><%= link_to "Back to log in", login_path %></div>

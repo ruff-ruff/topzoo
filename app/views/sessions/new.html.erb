@@ -1,0 +1,15 @@
+<% content_for :title, "Log in | Topzoo" %>
+<p class="eyebrow">Welcome back</p>
+<h1>Log in to Topzoo</h1>
+<p class="muted">Keep track of the animals that matter most to you.</p>
+<%= form_with url: session_path, class: "form-stack" do |form| %>
+  <%= label_tag :username, "Username" %>
+  <%= text_field_tag :username, params[:username], required: true, autofocus: true %>
+  <%= label_tag :password, "Password" %>
+  <%= password_field_tag :password, nil, required: true %>
+  <%= submit_tag "Log in", class: "button button-primary" %>
+<% end %>
+<div class="auth-links">
+  <%= link_to "Create an account", register_path %>
+  <%= link_to "Forgot your password?", forgot_password_path %>
+</div>

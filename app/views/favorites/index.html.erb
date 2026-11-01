@@ -1,0 +1,28 @@
+<% content_for :title, "My favorites | Topzoo" %>
+<div class="page-intro-row">
+  <div>
+    <p class="eyebrow">Your collection</p>
+    <h1>My three favorites</h1>
+    <p class="hero-copy">These are the animals you have chosen to keep at the top of your list.</p>
+  </div>
+  <div class="favorite-counter"><strong><%= @animals.size %></strong><span>of 3 spots filled</span></div>
+</div>
+<div class="favorite-slots favorite-cards">
+  <% (0...3).each do |slot| %>
+    <% animal = @animals[slot] %>
+    <div class="favorite-slot">
+      <% if animal %>
+        <span class="slot-number">0<%= slot + 1 %></span>
+        <%= link_to animal_path(animal), class: "favorite-card-link" do %>
+          <span class="favorite-card-image animal-image" style="<%= "background-image: url('#{animal.image_url}')" if animal.image_url.present? %>"></span>
+          <span class="favorite-card-name"><%= animal.name %></span>
+        <% end %>
+        <%= button_to "Dethrone", animal_favorite_path(animal), method: :delete, class: "text-button" %>
+      <% else %>
+        <span class="slot-number">0<%= slot + 1 %></span>
+        <span class="favorite-empty"><span class="empty-question">?</span><span class="muted">Open spot</span></span>
+        <%= link_to "Explore animals", animals_path, class: "text-link" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

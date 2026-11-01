@@ -1,0 +1,27 @@
+<% popular = local_assigns.fetch(:popular, false) %>
+<article class="animal-card">
+  <%= link_to animal_path(animal), class: "animal-card-link" do %>
+    <div class="animal-image" style="<%= "background-image: url('#{animal.image_url}')" if animal.image_url.present? %>">
+      <span><%= animal.taxonomy.split(",").first %></span>
+    </div>
+    <div class="animal-card-body">
+      <% if popular %>
+        <div class="popular-card-heading">
+          <h3><%= animal.name %></h3>
+          <span class="popular-like-count"><span aria-hidden="true">♥</span> <%= animal.favorite_count %></span>
+        </div>
+      <% else %>
+        <div class="card-title-row">
+          <h3><%= animal.name %></h3>
+          <% favorited = logged_in? && current_user.favorites.exists?(animal: animal) %>
+          <span class="favorite-indicator <%= 'is-favorite' if favorited %>" title="<%= favorited ? 'One of your favorites' : 'Not one of your favorites' %>" aria-label="<%= favorited ? 'One of your favorites' : 'Not one of your favorites' %>">
+            <span aria-hidden="true"><%= favorited ? "♥" : "♡" %></span>
+          </span>
+        </div>
+        <p class="scientific-name"><%= animal.scientific_name %></p>
+        <p><%= truncate(animal.summary, length: 180) %></p>
+        <div class="card-meta"><span><%= animal.habitat %></span><span><%= animal.taxonomy %></span></div>
+      <% end %>
+    </div>
+  <% end %>
+</article>

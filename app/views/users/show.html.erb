@@ -1,2 +1,10 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% content_for :title, "#{@user.username} | Topzoo" %>
+<p class="eyebrow">Member profile</p>
+<h1><%= @user.username %></h1>
+<p class="muted"><%= @user.role.capitalize %> · <%= @user.favorites.count %> favorite(s)</p>
+<div class="section-heading"><h2>Favorite animals</h2></div>
+<% if @user.favorite_animals.any? %>
+  <div class="animal-grid"><%= render @user.favorite_animals.order(:name) %></div>
+<% else %>
+  <div class="empty-state"><p>This user has not chosen any favorites yet.</p></div>
+<% end %>

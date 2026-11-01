@@ -23,26 +23,29 @@
   </head>
 
   <body>
-    <div id="page">
-      <div id="header">
-        <h1>Topzoo</h1>
-      </div>
-      <div id="body">
-        <div id="menu">
-          <% if is_admin ? %>
-          <%= render 'layouts/admin' %>
-          <% elsif is_user ? %>
-          <%= render 'layouts/user' %>
-          <% elsif is_guest ? %>
-          <%= render 'layouts/guest' %>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="container header-inner">
+          <%= link_to root_path, class: "brand" do %>
+            <span class="brand-mark">T</span>
+            <span>Topzoo</span>
           <% end %>
+          <nav class="main-nav" aria-label="Main navigation">
+            <%= render "layouts/admin" if is_admin? %>
+            <%= render "layouts/user" if is_user? %>
+            <%= render "layouts/guest" if is_guest? %>
+          </nav>
         </div>
-        <div id="main">
-          <%= yield %>
-        </div>
-      </div>
-      <div id="footer ">Copyright, RoR 2026</div>
+      </header>
+      <main class="container page-content">
+        <% flash.each do |type, message| %>
+          <div class="<%= flash_class(type) %>" role="status"><%= message %></div>
+        <% end %>
+        <%= yield %>
+      </main>
+      <footer class="site-footer">
+        <div class="container"><strong>Topzoo</strong> &mdash; discover your next favorite animal.</div>
+      </footer>
     </div>
-
   </body>
 </html>

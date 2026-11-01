@@ -1,0 +1,4 @@
+<% content_for :title, "Edit #{@animal.name} | Topzoo" %>
+<p class="eyebrow">Admin workspace</p>
+<h1>Edit <%= @animal.name %></h1>
+<%= render "form", animal: @animal, submit_label: "Save changes" %>

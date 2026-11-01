@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
-  get "users/index"
-  get "users/new"
-  get "users/edit"
-  get "users/show"
-  get "users/forgotten"
-  get "sessions/role"
-  get "sessions/login"
-  get "role/login"
-  get "say/hello"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root "animals#index"
+
+  resources :animals, only: %i[index show new create edit update] do
+    resource :favorite, only: %i[create destroy], controller: "animal_favorites"
+  end
+  get "popular", to: "animals#popular", as: :popular_animals
+  resources :favorites, only: :index
+
+  resource :session, only: %i[new create destroy]
+  get "login", to: "sessions#new", as: :login
+  get "register", to: "users#new", as: :register
+  get "forgot-password", to: "users#forgotten", as: :forgot_password
+  post "forgot-password", to: "users#forgotten"
+  resources :users, only: %i[index new create show]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
@@ -18,6 +22,4 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

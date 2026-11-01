@@ -23,10 +23,25 @@
   </head>
 
   <body>
-    <div id="page">
-        <div id="session_content">
-          <%= yield %>
+    <div class="auth-shell">
+      <div class="auth-layout">
+        <section class="auth-intro">
+          <%= link_to root_path, class: "brand auth-brand" do %>
+            <span class="brand-mark">T</span>
+            <span>Topzoo</span>
+          <% end %>
+          <p class="eyebrow">A field guide for favorites</p>
+          <h1>Find the animals<br>you care about.</h1>
+          <p>Explore the catalog, keep your top three close, and discover what the Topzoo community loves.</p>
+          <div class="auth-shape" aria-hidden="true">◒</div>
+        </section>
+        <div class="auth-card">
+        <% flash.each do |type, message| %>
+          <div class="<%= type == "alert" ? "flash flash-alert" : "flash flash-notice" %>"><%= message %></div>
+        <% end %>
+        <%= yield %>
         </div>
+      </div>
     </div>
 
   </body>

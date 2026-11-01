@@ -1,0 +1,24 @@
+<% content_for :title, "#{action_name == "popular" ? "Popular animals" : "Animal catalog"} | Topzoo" %>
+<section class="hero">
+  <div>
+    <p class="eyebrow"><%= action_name == "popular" ? "Community favorites" : "Explore the collection" %></p>
+    <h1><%= action_name == "popular" ? "The animals everyone is talking about." : "Meet the animals of Topzoo." %></h1>
+    <p class="hero-copy">Learn something new, find a favorite, and see which animals have captured the community.</p>
+  </div>
+  <div class="hero-illustration" aria-hidden="true">◒</div>
+</section>
+<div class="section-heading">
+  <h2><%= action_name == "popular" ? "Ranked by favorites" : "Browse all animals" %></h2>
+  <span class="muted"><%= @animals.size %> species</span>
+</div>
+<% if @animals.any? %>
+  <div class="animal-grid">
+    <%= render @animals, popular: action_name == "popular" %>
+  </div>
+<% else %>
+  <div class="empty-state">
+    <h2>The catalog is waiting for its first residents.</h2>
+    <p>Administrators can add an animal to get started.</p>
+    <%= link_to "Add an animal", new_animal_path, class: "button button-primary" if is_admin? %>
+  </div>
+<% end %>
